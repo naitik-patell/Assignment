@@ -248,15 +248,11 @@
 <div class="">
     <form>
         <div class="form-group ">
-            <input type="text " class="form-control form-control-lg" id="search" placeholder="Search" value="">
+            <input type="text " class="form-control form-control-lg" id="search" placeholder="Search">
         </div>
     </form>
     <div class="table-data" id="table-data">
     </div>
-
-
-
-
 </div>
 
 <script>
@@ -348,12 +344,17 @@
             })
         });
 
+
+
+
+
+
     });
 
 
     function fetchEmployeeRecords(search, pg) {
         // debugger;
-        // var search = $('#search').val();
+        var search = $('#search').val();
         $.ajax({
             method: "GET",
             url: "/Home/EmployeeFiltered",
@@ -382,14 +383,7 @@
             }
         });
     }
-  
 
-    // $("#search").keyup(function () {
-
-    //     var value = this.value;
-    //     console.log("value=", value);
-    //     fetchEmployeeRecords(value, 10);
-    // });
 
 
 </script>
