@@ -1,0 +1,44 @@
+﻿@model List<DAL.DTO.EmpTableDTO>
+@{
+    Layout = null;
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Age</th>
+            <th scope="col">Gender</th>
+            <th scope="col">Department</th>
+            <th scope="col">Education</th>
+            <th scope="col">Company</th>
+            <th scope="col">Experience</th>
+            <th scope="col">Package</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in Model)
+        {
+            <tr>
+                <th scope="row">@item.ID</th>
+                <th scope="row">@item.FirstName</th>
+                <th scope="row">@item.LastName</th>
+                <th scope="row">@item.Email</th>
+                <th scope="row">@item.Age</th>
+                <th scope="row">@item.Gender</th>
+                <th scope="row">@item.Department</th>
+                <th scope="row">@item.Education</th>
+                <th scope="row">@item.Company</th>
+                <th scope="row">@item.Experience</th>
+                <th scope="row">@item.Package</th>
+                <th scope="row"><button class="btn btn-dark me-1" data-bs-toggle="modal" data-bs-target="#EditEmpModal" data-id="@item.ID">Edit</button><a class="btn btn-danger" href="/home/DeleteEmpData/@item.ID" >Delete</a></th>
+               
+            </tr>
+        }
+       
+    </tbody>
+</table>

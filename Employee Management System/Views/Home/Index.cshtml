@@ -1,0 +1,395 @@
+﻿@model DAL.DTO.EmpTableDTO;
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@* ---------------------------------------------------Add Employee Modal ----------------------------------------------*@
+<div class="modal fade" id="AddEmpModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-success text-white">
+                <h5 class="modal-title" id="exampleModalLabel">Employee Form</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <form asp-action="AddEmployee" asp-controller="Home" method="post">
+                        <div class="d-md-flex gx-3">
+                            <div class="form-floating mb-3 col col-md-6 col-12 p-1">
+                                <input type="text" value="" class="form-control  shadow-none" id="firstname" asp-for="FirstName"/>
+                                <label for="firstName">FirstName</label>
+                                <span class="text-danger" asp-validation-for="FirstName"></span>
+
+                            </div>
+                            <div class="form-floating mb-3 col col-md-6 col-12 p-1">
+                                <input type="text" value="" class="form-control  shadow-none" id="lastname" asp-for="LastName" />
+                                <label for="lastname">LastName</label>
+                                <span class="text-danger" asp-validation-for="LastName"></span>
+
+                            </div>
+                        </div>
+                        <div class="d-md-flex gx-3">
+                            <div class="form-floating mb-3 col col-md-6 col-12 p-1">
+                                <input type="email" value="" class="form-control  shadow-none" id="Email" asp-for="Email"/>
+                                <label for="email">Email</label>
+                                <span class="text-danger" asp-validation-for="Email"></span>
+
+                            </div>
+                            <div class="form-floating mb-3 col col-md-6 col-12 p-1">
+                                <input type="text" inputmode="numeric" value="" class="form-control  shadow-none" id="age" asp-for="Age"/>
+                                <label for="Age">Age</label>
+                                <span class="text-danger" asp-validation-for="Age"></span>
+
+                            </div>
+                        </div>
+
+                        <div class="d-md-flex gx-3">
+                            <div class="form-check mb-3 col col-md-6 col-12 p-1 d-flex justify-content-around">
+                                Gender:
+                                <div class="col-3 d-inline">
+                                <input type="radio" value="Male" class="form-check-input" id="Malegender" name="gender" asp-for="Gender"/>
+                                <label for="gender">Male</label>
+                                </div>
+                                <div class="col-3 d-inline">
+                                <input type="radio" value="Female" class="form-check-input" id="Femalegender" name="gender" asp-for="Gender"/>
+                                <label for="gender">Female</label>
+                                </div>
+                                <div class="col-3 d-inline">
+                                <input type="radio" value="Others" class="form-check-input" id="Others" name="gender" asp-for="Gender" />
+                                <label for="gender">Others</label>
+                                </div>
+                                <span class="text-danger" asp-validation-for="Gender"></span>
+
+                            </div>
+                            <div class="form-floating mb-3 col col-md-6 col-12 p-1">
+
+                                <select class="form-select" id="departmentDropdown" asp-for="Department">
+                                    
+                                </select>
+                                
+                                <span class="text-danger" asp-validation-for="Department"></span>
+
+                            </div>
+                        </div>
+                        <div class="d-md-flex gx-3">
+                            <div class="form-floating mb-3 col col-md-6 col-12 p-1">
+                                <select class="form-select" id="Education" asp-for="Education">
+                                    <option>Graduate</option>
+                                    <option>Post Graduate</option>
+                                    <option>Intermediate</option>
+                                    <option>Diploma</option>
+                                    <option>Matric</option>
+                                </select>
+                                <span class="text-danger" asp-validation-for="Education"></span>
+
+                            </div>
+                            <div class="form-floating mb-3 col col-md-6 col-12 p-1">
+                                <input type="text" value="" class="form-control  shadow-none" id="companyName" asp-for="Company"/>
+                                <label for="companyName">Company Name</label>
+                                <span class="text-danger" asp-validation-for="Company"></span>
+
+                            </div>
+                        </div>
+
+                        <div class="d-md-flex gx-3">
+                            <div class="form-floating mb-3 col col-md-6 col-12 p-1">
+                                <input type="text" value="" class="form-control  shadow-none" id="experience" asp-for="Experience"/>
+                                <label for="experience">experience</label>
+                                <small id="emailHelp" class="form-text text-muted">In Years</small>
+                                <span class="text-danger" asp-validation-for="Experience"></span>
+
+                            </div>
+                            <div class="form-floating mb-3 col col-md-6 col-12 p-1">
+                                <input type="text" value="" class="form-control shadow-none" id="package" asp-for="Package"/>
+                                <label for="package">package</label>
+                                <small id="emailHelp" class="form-text text-muted">In Rupees</small>
+                                <span class="text-danger" asp-validation-for="Package"></span>
+
+                            </div>
+                        </div>
+
+
+                        
+                        <div class="d-flex p-1">
+                            <button type="button" class="btn btn-outline-success col-6 me-1" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-success me-3 text-white col-6">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@* -------------------------------------------------------------Edit Employee details Modal----------------------------------------- *@
+<div class="modal fade" id="EditEmpModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-success text-white">
+                <h5 class="modal-title" id="exampleModalLabel">Employee Form</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <form asp-action="EditEmployee" asp-controller="Home" method="post">
+                        <input type="text" id="EditEmpId" asp-for="ID" class="d-none"/>
+                        <div class="d-md-flex gx-3">
+                            <div class="form-floating mb-3 col col-md-6 col-12 p-1">
+                                <input type="text" value="" class="form-control  shadow-none" id="Editfirstname" asp-for="FirstName" />
+                                <label for="firstName">FirstName</label>
+                                <span class="text-danger" asp-validation-for="FirstName"></span>
+
+                            </div>
+                            <div class="form-floating mb-3 col col-md-6 col-12 p-1">
+                                <input type="text" value="" class="form-control  shadow-none" id="Editlastname" asp-for="LastName" />
+                                <label for="lastname">LastName</label>
+                                <span class="text-danger" asp-validation-for="LastName"></span>
+
+                            </div>
+                        </div>
+                        <div class="d-md-flex gx-3">
+                            <div class="form-floating mb-3 col col-md-6 col-12 p-1">
+                                <input type="email" value="" class="form-control  shadow-none" id="EditEmail" asp-for="Email" />
+                                <label for="email">Email</label>
+                                <span class="text-danger" asp-validation-for="Email"></span>
+
+                            </div>
+                            <div class="form-floating mb-3 col col-md-6 col-12 p-1">
+                                <input type="text" inputmode="numeric" value="" class="form-control  shadow-none" id="Editage" asp-for="Age" />
+                                <label for="Age">Age</label>
+                                <span class="text-danger" asp-validation-for="Age"></span>
+
+                            </div>
+                        </div>
+
+                        <div class="d-md-flex gx-3">
+                            <div class="form-check mb-3 col col-md-6 col-12 p-1 d-flex justify-content-around">
+                                Gender:
+                                <div class="col-3 d-inline">
+                                    <input type="radio" value="Male" class="form-check-input" id="Malegender" name="gender" asp-for="Gender" />
+                                    <label for="gender">Male</label>
+                                </div>
+                                <div class="col-3 d-inline">
+                                    <input type="radio" value="Female" class="form-check-input" id="Femalegender" name="gender" asp-for="Gender" />
+                                    <label for="gender">Female</label>
+                                </div>
+                                <div class="col-3 d-inline">
+                                    <input type="radio" value="Others" class="form-check-input" id="Others" name="gender" asp-for="Gender" />
+                                    <label for="gender">Others</label>
+                                </div>
+                                <span class="text-danger" asp-validation-for="Gender"></span>
+
+                            </div>
+                            <div class="form-floating mb-3 col col-md-6 col-12 p-1">
+
+                                <select class="form-select" id="EditdepartmentDropdown" asp-for="Department" >
+                                </select>
+
+                                <span class="text-danger" asp-validation-for="Department"></span>
+
+                            </div>
+                        </div>
+                        <div class="d-md-flex gx-3">
+                            <div class="form-floating mb-3 col col-md-6 col-12 p-1">
+                                <select class="form-select" id="EditEducation" asp-for="Education">
+                                    <option>Graduate</option>
+                                    <option>Post Graduate</option>
+                                    <option>Intermediate</option>
+                                    <option>Diploma</option>
+                                    <option>Matric</option>
+                                </select>
+                                <span class="text-danger" asp-validation-for="Education"></span>
+
+                            </div>
+                            <div class="form-floating mb-3 col col-md-6 col-12 p-1">
+                                <input type="text" value="" class="form-control  shadow-none" id="EditcompanyName" asp-for="Company" />
+                                <label for="companyName">Company Name</label>
+                                <span class="text-danger" asp-validation-for="Company"></span>
+
+                            </div>
+                        </div>
+
+                        <div class="d-md-flex gx-3">
+                            <div class="form-floating mb-3 col col-md-6 col-12 p-1">
+                                <input type="text" value="" class="form-control  shadow-none" id="Editexperience" asp-for="Experience" />
+                                <label for="experience">experience</label>
+                                <small id="emailHelp" class="form-text text-muted">In Years</small>
+                                <span class="text-danger" asp-validation-for="Experience"></span>
+
+                            </div>
+                            <div class="form-floating mb-3 col col-md-6 col-12 p-1">
+                                <input type="text" value="" class="form-control shadow-none" id="Editpackage" asp-for="Package" />
+                                <label for="package">package</label>
+                                <small id="emailHelp" class="form-text text-muted">In Rupees</small>
+                                <span class="text-danger" asp-validation-for="Package"></span>
+
+                            </div>
+                        </div>
+
+
+
+                        <div class="d-flex p-1">
+                            <button type="button" class="btn btn-outline-success col-6 me-1" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-success me-3 text-white col-6">Edit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@* --------------------------------------------------------------Main div----------------------------------------------------------- *@
+
+<div class="">
+    <form>
+        <div class="form-group ">
+            <input type="text " class="form-control form-control-lg" id="search" placeholder="Search" value="">
+        </div>
+    </form>
+    <div class="table-data" id="table-data">
+    </div>
+
+
+
+
+</div>
+
+<script>
+    $(document).ready(function () {
+
+
+        fetchEmployeeRecords(search, 10);
+
+        $('#AddEmpModal').on('show.bs.modal', function (event) {
+          
+            debugger;
+            $.ajax({
+
+                url: "/Home/GetDepartmentData",
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    // console.log(data);
+                    var selectEle = $('#departmentDropdown');
+                    selectEle.empty();
+                    
+                    data.forEach(function (item) {
+                        var option = $('<option></option>')
+                            .val(item.id)
+                            .text(item.name);
+                        selectEle.append(option);
+                    });
+                },
+                error: function (error) {
+                    console.error("Error:", error);
+                    // Handle any errors in the AJAX request
+                    // ... (your error handling logic)
+                }
+            })
+        });
+
+
+        $('#EditEmpModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget); // Button that triggered the modal
+            var id = button.data('id'); // Extract data from data-id attribute
+          
+
+            // $('#RequestId').val(id);
+            // $('#cancel-case-modal-name').text(name);
+            debugger;
+            $.ajax({
+
+                url: "/Home/GetDepartmentData",
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    // console.log(data);
+                    var selectEle = $('#EditdepartmentDropdown');
+                    selectEle.empty();
+
+                    data.forEach(function (item) {
+                        var option = $('<option></option>')
+                            .val(item.id)
+                            .text(item.name);
+                        selectEle.append(option);
+                    });
+
+                    $.ajax({
+                        url:"Home/GetEmpData",
+                        type:'GET',
+                        data: {id:id},
+                        success: function (data) {
+                            console.log(data);
+                            $("#EditEmpId").val(id);
+                            $('input[name="gender"][value="' + data.gender + '"').prop('checked', true);
+                            $("#Editfirstname").val(data.firstname);
+                            $("#Editlastname").val(data.lastname);
+                            $("#EditEmail").val(data.email);
+                            $("#Editage").val(data.age);
+                            $("#EditdepartmentDropdown").val(data.deptid);
+                            $("#EditEducation").val(data.education);
+                            $("#EditcompanyName").val(data.company);
+                            $("#Editexperience").val(data.experience);
+                            $("#Editpackage").val(data.package);
+
+                        }
+                    })
+                },
+                error: function (error) {
+                    console.error("Error:", error);
+                    // Handle any errors in the AJAX request
+                    // ... (your error handling logic)
+                }
+            })
+        });
+
+    });
+
+
+    function fetchEmployeeRecords(search, pg) {
+        // debugger;
+        // var search = $('#search').val();
+        $.ajax({
+            method: "GET",
+            url: "/Home/EmployeeFiltered",
+            data: {
+                search: search,
+                pg: 10
+            },
+            success: function (response) {
+                if (response.code == 401) {
+                    location.reload();
+                } else {
+                    console.log("Function Success");
+                    $('#table-data').html(response);
+                    var windowsize = $(window).width();
+                    // if (windowsize > 766) {
+                    //     setupPagination(10, '.data-row');
+                    // }
+                    // else {
+                    //     setupPagination(10, '.data-mobile-row');
+                    // }
+                }
+            },
+            error: function (e) {
+                console.log(e);
+                // toastr.error("Failed to fetch records.");
+            }
+        });
+    }
+  
+
+    // $("#search").keyup(function () {
+
+    //     var value = this.value;
+    //     console.log("value=", value);
+    //     fetchEmployeeRecords(value, 10);
+    // });
+
+
+</script>
