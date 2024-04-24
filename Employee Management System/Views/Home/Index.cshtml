@@ -256,10 +256,10 @@
 </div>
 
 <script>
+        var pg = 1;
     $(document).ready(function () {
 
-
-        fetchEmployeeRecords(search, 10);
+        fetchEmployeeRecords(search, pg);
 
         $('#AddEmpModal').on('show.bs.modal', function (event) {
           
@@ -383,6 +383,15 @@
             }
         });
     }
+
+    $("#search").keyup(
+        function () {
+
+            var value = this.value;
+            fetchEmployeeRecords(search, pg);
+
+
+        });
 
 
 
